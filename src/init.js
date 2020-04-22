@@ -14,6 +14,7 @@ function drawCanvas () {
   ctx.fillRect(0, 0, canv.width, canv.height);
 
   drawObstacles();
+  drawGoal();
 }
 
 function drawObstacles () {
@@ -26,4 +27,14 @@ function drawObstacles () {
     , eachObstacle.height
     );
   }
+}
+
+function drawGoal () {
+  ctx.fillStyle = 'green';
+  ctx.fillRect(
+    GOAL.x
+  , GOAL.y
+  , GOAL.width
+  , GOAL.height
+  )
 }
