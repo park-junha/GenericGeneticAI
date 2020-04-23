@@ -124,7 +124,7 @@ class Population {
         distToGoalY = Math.abs(unit.position.y - GOAL.y);
         distToGoal = Math.sqrt(
           distToGoalX * distToGoalX
-        + distToGoalY + distToGoalY
+        + distToGoalY * distToGoalY
         );
         unitPerformance = 1 / (distToGoal * distToGoal);
 
