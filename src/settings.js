@@ -2,10 +2,24 @@ const SETTINGS = {
   'CANVAS': {
     'WIDTH': 600
   , 'HEIGHT': 600
+  , 'COLOR': 'silver'
   }
 , 'FRAMERATE': 60
 , 'WALLWIDTH': 2
 , 'GOALWIDTH': 10
+, 'POPULATION_SIZE': 500
+, 'UNIT': {
+    'start': {
+      'x': 300
+    , 'y': 550
+    }
+  , 'speed': 8
+  , 'size': {
+      'width': 8
+    , 'height': 8
+    }
+  , 'color': 'blue'
+  }
 };
 
 const OBSTACLES = [
@@ -43,11 +57,6 @@ const OBSTACLES = [
   , 'height': 20
   }
 ];
-
-const START = {
-  'x': 300
-, 'y': 550
-}
 
 const GOAL = {
   'x': 225

@@ -1,10 +1,12 @@
-window.onload = function () {
+window.onload = function() {
   canv = document.getElementById('gameController');
 
   drawCanvas();
 }
 
-function drawCanvas () {
+function drawCanvas() {
+  setInterval(eventTick, 1000 / SETTINGS.FRAMERATE);
+
   canv.width = SETTINGS.CANVAS.WIDTH;
   canv.height = SETTINGS.CANVAS.HEIGHT;
 
@@ -15,9 +17,11 @@ function drawCanvas () {
 
   drawObstacles();
   drawGoal();
+
+  startAi();
 }
 
-function drawObstacles () {
+function drawObstacles() {
   ctx.fillStyle = 'red';
   for (var eachObstacle of OBSTACLES) {
     ctx.fillRect(
@@ -29,7 +33,7 @@ function drawObstacles () {
   }
 }
 
-function drawGoal () {
+function drawGoal() {
   ctx.fillStyle = 'green';
   ctx.fillRect(
     GOAL.x
@@ -37,4 +41,12 @@ function drawGoal () {
   , GOAL.width
   , GOAL.height
   )
+}
+
+function startAi() {
+  population = new Population(SETTINGS.POPULATION_SIZE, SETTINGS.UNIT);
+}
+
+function eventTick() {
+  population.takeNextSteps();
 }
