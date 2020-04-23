@@ -7,11 +7,11 @@ const SETTINGS = {
 , 'FRAMERATE': 60
 , 'WALLWIDTH': 2
 , 'GOALWIDTH': 10
-, 'POPULATION_SIZE': 500
+, 'POPULATION_SIZE': 750
 , 'UNIT': {
     'start': {
-      'x': 300
-    , 'y': 550
+      'x': 200
+    , 'y': 450
     }
   , 'speed': 8
   , 'size': {
@@ -19,6 +19,7 @@ const SETTINGS = {
     , 'height': 8
     }
   , 'color': 'blue'
+  , 'mutate_rate': 0.01
   }
 };
 
@@ -51,9 +52,9 @@ const OBSTACLES = [
 
   //  Other obstacles
 , {
-    'x': 100
-  , 'y': 290
-  , 'width': 400
+    'x': 200
+  , 'y': 360
+  , 'width': 300
   , 'height': 20
   }
 ];

@@ -1,12 +1,12 @@
 window.onload = function() {
   canv = document.getElementById('gameController');
-
   drawCanvas();
+
+  startAi();
+  setInterval(eventTick, 1000 / SETTINGS.FRAMERATE);
 }
 
 function drawCanvas() {
-  setInterval(eventTick, 1000 / SETTINGS.FRAMERATE);
-
   canv.width = SETTINGS.CANVAS.WIDTH;
   canv.height = SETTINGS.CANVAS.HEIGHT;
 
@@ -17,20 +17,22 @@ function drawCanvas() {
 
   drawObstacles();
   drawGoal();
-
-  startAi();
 }
 
 function drawObstacles() {
-  ctx.fillStyle = 'red';
-  for (var eachObstacle of OBSTACLES) {
-    ctx.fillRect(
-      eachObstacle.x
-    , eachObstacle.y
-    , eachObstacle.width
-    , eachObstacle.height
-    );
+  for (var obstacle of OBSTACLES) {
+    renderObstacle(obstacle);
   }
+}
+
+function renderObstacle(obstacle) {
+  ctx.fillStyle = 'red';
+  ctx.fillRect(
+    obstacle.x
+  , obstacle.y
+  , obstacle.width
+  , obstacle.height
+  );
 }
 
 function drawGoal() {
@@ -40,7 +42,7 @@ function drawGoal() {
   , GOAL.y
   , GOAL.width
   , GOAL.height
-  )
+  );
 }
 
 function startAi() {

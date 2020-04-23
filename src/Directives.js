@@ -4,22 +4,30 @@ class Directives {
     this.steps = steps;
     if (directives !== null) {
       this.directives = directives;
+
+      //  Generate random directives if steps is larger than given directives
+      this.randomizeAllDirectivesFrom(directives.length)
     }
     else {
-      this.randomizeDirectives(0);
+      this.randomizeAllDirectivesFrom(0);
     }
   }
 
   //  Initialize random directives
-  randomizeDirectives(startingStep) {
+  randomizeAllDirectivesFrom(startingStep) {
     for (var i = startingStep; i < this.steps; i++) {
-      //  Select a random value from 0 to 2pi
-      var radians = Math.random() * Math.PI * 2
-      //  Then initialize 2D vector using trigonometry
-      this.directives[i] = {
-        'translateX': Math.cos(radians)
-      , 'translateY': Math.sin(radians)
-      }
+      this.randomizeDirective(i);
     }
+  }
+
+  //  Create a random directive
+  randomizeDirective(i) {
+    //  Select a random value from 0 to 2pi
+    var radians = Math.random() * Math.PI * 2;
+    //  Then initialize 2D vector using trigonometry
+    this.directives[i] = {
+      'translateX': Math.cos(radians)
+    , 'translateY': Math.sin(radians)
+    };
   }
 }
