@@ -1,31 +1,23 @@
 class Unit {
   constructor(unitSettings, steps, directives = null) {
-    this.originalStart = {
-      'x': unitSettings.start.x
-    , 'y': unitSettings.start.y
-    };
-    this.originalSpeed = unitSettings.speed;
     this.size = {
       'width': unitSettings.size.width
     , 'height': unitSettings.size.height
     };
-
-    this.maxSteps = steps;
-    this.reset();
-
-    this.directives = new Directives(steps, directives);
-    this.drawUnit(SETTINGS.UNIT.color);
-  }
-
-  reset() {
     this.position = {
-      'x': this.originalStart.x
-    , 'y': this.originalStart.y
+      'x': unitSettings.start.x
+    , 'y': unitSettings.start.y
     };
-    this.speed = this.originalSpeed;
+
+    this.speed = unitSettings.speed;
     this.state = 'active';
 
     this.currentStep = 0;
+
+    this.maxSteps = steps;
+    this.color = SETTINGS.UNIT.color;
+
+    this.directives = new Directives(steps, directives);
   }
 
   drawUnit(color, offset = 0) {
@@ -103,6 +95,6 @@ class Unit {
       return;
     }
 
-    this.drawUnit(SETTINGS.UNIT.color);
+    this.drawUnit(this.color);
   }
 }

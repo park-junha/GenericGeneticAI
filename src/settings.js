@@ -7,7 +7,7 @@ const SETTINGS = {
 , 'FRAMERATE': 60
 , 'WALLWIDTH': 2
 , 'GOALWIDTH': 10
-, 'POPULATION_SIZE': 750
+, 'POPULATION_SIZE': 10
 , 'UNIT': {
     'start': {
       'x': 200
@@ -19,6 +19,7 @@ const SETTINGS = {
     , 'height': 8
     }
   , 'color': 'blue'
+  , 'clone_color': 'orange'
   , 'mutate_rate': 0.01
   }
 };

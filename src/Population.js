@@ -51,7 +51,6 @@ class Population {
 
     //  Best unit lives on to next generation
     newGeneration[0] = report.bestUnit
-    newGeneration[0].reset();
 
     //  Clone the parent and then mutate them :'D
     //  Replace the remainder of the population with mutated clones
@@ -60,10 +59,14 @@ class Population {
         report.totalPerformanceScore
       , report.fitnessIndices
       );
-      newParent.reset();
-      var mutatedUnit = this.mutate(newParent);
-      newGeneration.push(mutatedUnit);
+//    console.log(newParent);
+      newParent.directives.mutate();
+//    var mutatedUnit = this.mutate(newParent);
+//    newGeneration.push(mutatedUnit);
+      newGeneration.push(newParent);
     }
+
+    console.log(newGeneration[0]);
 
     return newGeneration;
   }
@@ -74,7 +77,7 @@ class Population {
     let randomIndex = Math.random() * rngCeiling;
     for (var i = 0; i < this.units.length; i++) {
       if (randomIndex <= fitnessIndices[i]) {
-        return this.units[i];
+        return new Unit(this.unitSettings, this.steps, this.units[i].directives.directives);
       }
     }
 
@@ -85,18 +88,18 @@ class Population {
   }
 
   //  Mutate a unit
-  mutate(unit) {
-    var directives = unit.directives;
-    var rand;
-    for (var i = 0; i < directives.directives.length; i++) {
-      rand = Math.random();
-      if (rand < SETTINGS.UNIT.mutate_rate) {
-        directives.randomizeDirective(i);
-      }
-    }
+//mutate(unit) {
+//  var directives = unit.directives;
+//  var rand;
+//  for (var i = 0; i < directives.directives.length; i++) {
+//    rand = Math.random();
+//    if (rand < SETTINGS.UNIT.mutate_rate) {
+//      directives.randomizeDirective(i);
+//    }
+//  }
 
-    return new Unit(this.unitSettings, this.steps, directives.directives);
-  }
+//  return new Unit(this.unitSettings, this.steps, directives.directives);
+//}
 
   //  Determine performance of population by unit
   determinePerformance() {
@@ -129,7 +132,7 @@ class Population {
         unitPerformance = 1 / (distToGoal * distToGoal);
 
         //  Reduce performance points if dead by collision
-        unitPerformance *= Math.pow((unit.currentStep / unit.maxSteps), 3);
+//      unitPerformance *= Math.pow((unit.currentStep / unit.maxSteps), 2);
       }
 
       report.totalPerformanceScore += unitPerformance;
@@ -137,11 +140,13 @@ class Population {
 
       //  Check if best performance among units
       if (unitPerformance > bestPerformance) {
-        report.bestUnit = unit;
+        report.bestUnit = new Unit(this.unitSettings, this.steps, unit.directives.directives);
         bestPerformance = unitPerformance;
       }
     }
-    console.log(report);
+
+    report.bestUnit.color = SETTINGS.UNIT.clone_color;
+
     return report;
   }
 
